@@ -1,33 +1,15 @@
-{
-  "expo": {
-    "name": "e-ciclo",
-    "slug": "e-ciclo",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#32CD32"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#32CD32"
-      },
-      "package": "com.tomazolv.eciclo"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "1c5ad169-0b45-47a4-b830-43e600633eab"
-      }
-    }
-  }
-}
+"icon": "./assets/icon.png", 
+
+"splash": {
+  "image": "./assets/splash.png",
+  "resizeMode": "contain",
+  "backgroundColor": "#32CD32" 
+},
+
+"android": {
+  "adaptiveIcon": {
+    "foregroundImage": "./assets/adaptive-icon.png",
+    "backgroundColor": "#32CD32"
+  },
+  "package": "com.seuusername.eciclo" 
+},
