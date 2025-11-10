@@ -4,25 +4,14 @@
     "slug": "e-ciclo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",  
     "userInterfaceStyle": "automatic",
-    
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#32CD32"
-    },  
     
     "ios": {
       "supportsTablet": true
     },
-
+    
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#32CD32"
-      },
-      "package": "com.tomazolv.eciclo"
+      "package": "com.tomazolv.eciclo" 
     },
     
     "web": {
