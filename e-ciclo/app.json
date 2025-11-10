@@ -5,17 +5,19 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    
     "ios": {
       "supportsTablet": true
     },
-    
     "android": {
-      "package": "com.tomazolv.eciclo" 
+      "package": "com.tomazolv.eciclo"
     },
-    
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1c5ad169-0b45-47a4-b830-43e600633eab"
+      }
     }
   }
 }
