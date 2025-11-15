@@ -1,16 +1,45 @@
 {
   "expo": {
-    "name": "e-ciclo",
-    "slug": "e-ciclo",
-    "version": "1.0.0",
+    "name": "E-Ciclo",
+    "slug": "e-ciclo-mdg",
+    "version": "0.0.2",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    
+    
+    "splash": {
+      
+      "image": "./assets/splash.png",
+      
+      "backgroundColor": "#0fd62f",
+      
+      "resizeMode": "contain"
+    },
+    
+   
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "supportsTablet": true
-    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    
+    
+    
     "android": {
-      "package": "com.tomazolv.eciclo"
+      "adaptiveIcon": {
+        
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#000000" 
+      },
+      "package": "com.tomazolv.eciclo",
+      "versionCode": 2, 
+      
+      "splash": {
+        "image": "./assets/splash.png",
+        "backgroundColor": "#0fd62f",
+        "resizeMode": "contain"
+      }
     },
+    
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -18,6 +47,15 @@
       "eas": {
         "projectId": "1c5ad169-0b45-47a4-b830-43e600633eab"
       }
-    }
+    },
+    
+    "plugins": [
+      
+      "expo-router",
+      "expo-font"
+    ],
+    
+    
+    "scheme": "eciclo" 
   }
 }

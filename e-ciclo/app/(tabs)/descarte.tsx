@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Image, 
+  ScrollView, 
+  TouchableOpacity, 
+  Modal 
+} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+// 1. CORREÇÃO: Corrigido o caminho para corresponder a outros arquivos na pasta (tabs)
 import { COLORS, FONTS } from '../../constants/theme';
 
 export default function DescarteScreen() {
@@ -10,20 +19,26 @@ export default function DescarteScreen() {
   const [tipoDescarte, setTipoDescarte] = useState('Pilhas e Baterias');
   const [parceiro, setParceiro] = useState('E-Descartes');
   const [radioSelected, setRadioSelected] = useState('ponto-coleta');
+  
+  // Estado para o modal de "Descarte Solicitado"
   const [modalVisible, setModalVisible] = useState(false);
+  // 2. ADICIONADO: Novo estado para o Modal de Contato
+  const [contactModalVisible, setContactModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.container}>
       {/* 1. Título (Lato, Verde-Limão) */}
       <Text style={styles.title}>Descartes</Text>
 
-      {/* 2. Imagem do Mapa */}
-      <Image
-        source={require('../../assets/images/mapa-simulado.png')} // Certifique-se que o arquivo existe
-        style={styles.mapImage}
-      />
+      {/* 3. IMAGEM CLICÁVEL: Envolvida com TouchableOpacity */}
+      <TouchableOpacity onPress={() => setContactModalVisible(true)}>
+        <Image
+          source={require('../../assets/images/mapa-simulado.gif')} // Certifique-se que o arquivo existe
+          style={styles.mapImage}
+        />
+      </TouchableOpacity>
 
-      {/* 3. Caixa Suspensa 1: Tipo de Descarte */}
+      {/* 4. Caixa Suspensa 1: Tipo de Descarte */}
       <Text style={styles.label}>Tipo de Descarte</Text>
       <View style={styles.pickerContainer}>
         <Picker
@@ -38,7 +53,7 @@ export default function DescarteScreen() {
         </Picker>
       </View>
 
-      {/* 4. Caixa Suspensa 2: Parceiros */}
+      {/* 5. Caixa Suspensa 2: Parceiros */}
       <Text style={styles.label}>Parceiros</Text>
       <View style={styles.pickerContainer}>
         <Picker
@@ -53,7 +68,7 @@ export default function DescarteScreen() {
         </Picker>
       </View>
 
-      {/* 5. Radio Buttons */}
+      {/* 6. Radio Buttons */}
       <TouchableOpacity 
         style={styles.radioContainer} 
         onPress={() => setRadioSelected('ponto-coleta')}
@@ -78,10 +93,10 @@ export default function DescarteScreen() {
         <Text style={styles.radioLabel}>Agendar Retirada</Text>
       </TouchableOpacity>
 
-      {/* 6. Botões */}
+      {/* 7. Botões */}
       <TouchableOpacity 
         style={styles.buttonDark} 
-        onPress={() => setModalVisible(true)} // Abre o Modal
+        onPress={() => setModalVisible(true)} // Abre o Modal de Descarte
       >
         <Text style={styles.buttonTextWhite}>Novo Descarte</Text>
       </TouchableOpacity>
@@ -92,7 +107,7 @@ export default function DescarteScreen() {
         </TouchableOpacity>
       </Link>
 
-      {/* 7. Modal de Confirmação */}
+      {/* 8. Modal de Confirmação (Descarte Solicitado) */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -101,12 +116,45 @@ export default function DescarteScreen() {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Descarte Solicitado</Text>
+            <Text style={styles.modalTitle}>Descarte Solicitado</Text>
             <TouchableOpacity 
               style={styles.buttonLight} 
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.buttonTextBlack}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 9. ADICIONADO: Novo Modal de Contato */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={contactModalVisible} // Controlado pelo novo estado
+        onRequestClose={() => setContactModalVisible(false)}
+      >
+        {/* Overlay escuro */}
+        <View style={styles.modalOverlay}>
+          {/* Caixa de conteúdo do Modal */}
+          <View style={styles.modalContent}>
+            <Ionicons name="mail" size={40} color={COLORS.limeGreen} style={{ marginBottom: 15 }} />
+            
+            <Text style={styles.modalTitle}>Entre em Contato</Text>
+            
+            <Text style={styles.modalText}>
+              Entre em contato no e-mail:
+            </Text>
+            <Text style={styles.modalEmail}>
+              mdgstartups@gmail.com
+            </Text>
+
+            {/* Botão de Fechar */}
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setContactModalVisible(false)} // Fecha este modal
+            >
+              <Text style={styles.modalCloseButtonText}>Fechar</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -124,8 +172,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    // Título: Lato, Negrito, Verde-Limão (Conforme especificado para esta tela)
-    fontFamily: FONTS.text, // Lato
+    fontFamily: FONTS.text, 
     fontWeight: 'bold',
     fontSize: 28,
     color: COLORS.limeGreen,
@@ -137,11 +184,12 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     marginBottom: 20,
-    backgroundColor: '#555', // Placeholder se a imagem não carregar
+    backgroundColor: '#555', 
+    borderWidth: 2, // Adiciona uma borda para parecer clicável
+    borderColor: COLORS.limeGreen, // Borda verde
   },
   label: {
-    // Texto descritivo: Lexend, Branco (Conforme especificado para esta tela)
-    fontFamily: FONTS.title, // Lexend
+    fontFamily: FONTS.title, 
     color: COLORS.white,
     fontSize: 16,
     marginBottom: 8,
@@ -163,7 +211,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   radioLabel: {
-    fontFamily: FONTS.title, // Lexend
+    fontFamily: FONTS.title, 
     color: COLORS.white,
     fontSize: 16,
     marginLeft: 10,
@@ -184,18 +232,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTextWhite: {
-    fontFamily: FONTS.title, // Lexend
+    fontFamily: FONTS.title, 
     color: COLORS.white,
     fontSize: 16,
     fontWeight: 'bold',
   },
   buttonTextBlack: {
-    fontFamily: FONTS.title, // Lexend
+    fontFamily: FONTS.title, 
     color: COLORS.black,
     fontSize: 16,
     fontWeight: 'bold',
   },
-  // Estilos do Modal
+  
+  // --- ESTILOS DO MODAL (Adaptados de home.tsx) ---
   modalOverlay: {
     flex: 1,
     justifyContent: 'center',
@@ -203,19 +252,54 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   modalContent: {
-    backgroundColor: COLORS.darkGray,
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
+    width: '90%',
+    backgroundColor: COLORS.darkGray, 
+    borderRadius: 15,
+    padding: 25,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: COLORS.limeGreen,
+    borderColor: COLORS.limeGreen, 
+    elevation: 10,
+    shadowColor: COLORS.limeGreen,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+  },
+  // 10. ADICIONADO: Estilo de Título para o Modal
+  modalTitle: {
+    fontFamily: FONTS.title,
+    fontSize: 22,
+    color: COLORS.limeGreen,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   modalText: {
-    fontFamily: FONTS.title, // Lexend
+    fontFamily: FONTS.text,
+    fontSize: 16,
     color: COLORS.white,
-    fontSize: 20,
-    marginBottom: 20,
     textAlign: 'center',
+    marginBottom: 5,
+  },
+  // 11. ADICIONADO: Estilo de E-mail para o Modal
+  modalEmail: {
+    fontFamily: FONTS.text,
+    fontSize: 16,
+    color: COLORS.white,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  // 12. ADICIONADO: Estilo do Botão Fechar (baseado em home.tsx)
+  modalCloseButton: {
+    backgroundColor: COLORS.limeGreen,
+    paddingVertical: 12,
+    paddingHorizontal: 35,
+    borderRadius: 10,
+  },
+  modalCloseButtonText: {
+    fontFamily: FONTS.title,
+    color: COLORS.darkGray, // Texto escuro no botão verde
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
