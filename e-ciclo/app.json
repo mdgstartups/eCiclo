@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "E-Ciclo",
-    "slug": "e-ciclo-mdg",
+    "slug": "e-ciclo",
     "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
